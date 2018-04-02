@@ -1,0 +1,52 @@
+{% extends "template.html" %}
+{% block content %}
+
+    <h1>{{ titulo }}</h1>
+    <form method="post" action="{{ url_for('teste')}}" id="TipoPrincipalForm" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="classification">Tipo Principal</label>
+            <select class="form-control" id="classification">
+                {% for tipo in tiposPrincipais %}
+                    <!---VIR DE UM FOR QUE VIRA DO BANCO -->
+                    <option name="tipo">{{ tipo }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </form>
+    <!--
+        <div class="form-group">
+            <label for="FormAlbum">Nome Album</label>
+            <select class="form-control" id="FormAlbum">
+                VIR DE UM FOR QUE VIRA DO BANCO 
+                <option>Album Casamento</option>
+                <option>Album Esportes</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="FormImageFile">Fotos</label>
+            <input type="file" class="form-control-file" id="FormImageFile" multiple>
+            <div class="gallery">
+            </div>
+        </div> 
+        <button type="button" class="btn send-button btn-primary btn-lg">Adicionar Fotos</button>
+    </form>-->
+    <style>
+        .Size-image{
+            width: 400px;
+            height: 200px;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+        .buttons{
+            margin:10px;
+        }
+        .send-button{
+            margin: 20px;
+        }
+    </style>
+    <script src="../../static/imagesShow.js"></script>
+
+{% endblock %}
