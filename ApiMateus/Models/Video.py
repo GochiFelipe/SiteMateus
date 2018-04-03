@@ -4,7 +4,7 @@ class Video:
         self.Url = Url
         self.Tipo = Tipo
 
-    def RecuperaVideos(self, itens):
+    def recuperaVideos(self, itens):
         Videos = []
         for videos in itens.get('Videos'):
             Video_id = str(videos.get('_id'))

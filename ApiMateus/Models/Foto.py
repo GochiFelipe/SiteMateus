@@ -5,7 +5,7 @@ class Foto:
         self.Local = Local
         self.Tag = Tag
 
-    def RecuperaFotos(self, itens):
+    def recuperaFotos(self, itens):
         Fotos = []
         for fotos in itens.get('Fotos'):
             Foto_id = str(fotos.get('_id'))

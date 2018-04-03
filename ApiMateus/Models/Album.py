@@ -6,7 +6,7 @@ class Album:
         self.FotoCapa = FotoCapa
         self.Tipo = Tipo
 
-    def RecuperaAlbunsId(self, itens):
+    def recuperaAlbuns(self, itens):
         Albuns = []
         for album in itens.get('Album'):
             Album_id = str(album.get('_id'))
@@ -20,3 +20,9 @@ class Album:
             }
             Albuns.append(a)
         return Albuns
+
+    def albumParser(objeto):
+        Valores = {}
+        for (nomes, valores) in objeto.items():
+            Valores.update({nomes :valores})
+        return Valores

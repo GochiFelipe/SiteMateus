@@ -1,30 +1,32 @@
 from flask_restful import Resource, reqparse
-from flask import Flask, jsonify, request
-from Database.CreateDatabase import *
-from pprint import pprint
-from bson import ObjectId
-from Models.Album import *
-from Models.Colecao import *
+from Models.Album import Album
+from DAO.ColecaoDao import ColecaoDao
 
 class ColecaoApi(Resource):
     def get(self, tipo):
         try:
-            colecoes = Colecoes.find({"Tipo":tipo.lower()})
-            for itens in colecoes:
-                pprint(itens)
-                Id = str(itens.get('_id'))
-                Albuns = Album.RecuperaAlbunsId(self, itens)
-                Tipo = itens.get("Tipo")
-                colecao = Colecao(Tipo, Albuns)
-            return {'Id' : Id,
-                    'Album' : Albuns }
+            return ColecaoDao.Busca.buscaColecaoTipo(self, tipo)
         except:
             return ('Não Existem Registros')
 
     def post(self, tipo):
-        parser = reqparse.RequestParser()
-        parser.add_argument('username')
-        parser.add_argument('password')
-        args = parser.parse_args()
-        print (args['username'], args['password'])
-        return ({"Username": args['username'], "Password": args['password']})
+        try:
+            parser_principal = reqparse.RequestParser()
+            parser_principal.add_argument('Tipo')
+            parser_principal.add_argument('Album', type = Album.albumParser, action='append')
+            args_principal = parser_principal.parse_args()
+            adicionaColecao = ColecaoDao.Insere.inserirColecao(self, args_principal)
+            return adicionaColecao
+        except:
+            return('Objeto Incompleto')
+    
+'''
+        parser_album = reqparse.RequestParser()
+        print(parser_album)
+        parser_album.add_argument('Nome',type = str, location=('Album',))
+        args_album = parser_album.parse_args(req=parser_principal)
+        print (args_album['Nome'])
+        
+
+        print (args_principal['Tipo'], args_principal['Album'])
+'''
