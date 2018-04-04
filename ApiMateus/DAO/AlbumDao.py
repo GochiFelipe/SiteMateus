@@ -26,7 +26,14 @@ class AlbumDao:
                     'FotoCapa' : album.FotoCapa }
         
     class Insere:
-        pass
+
+        def inserirAlbum (self, objeto):
+            try:
+                post = objeto
+                album = Albuns.insert_one(post)
+                return True
+            except:
+                return False
 
     class Atualiza:
         pass
