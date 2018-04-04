@@ -16,7 +16,7 @@ from Api.AlbumApi import AlbumApi
 from Api.ColecoesApi import ColecoesApi
 
 api.add_resource(ColecoesApi, '/api/colecao')
-api.add_resource(ColecaoApi, '/api/colecao/<string:id>', '/api/colecao/<string:tipo>')
+api.add_resource(ColecaoApi, '/api/colecao/<string:tipo>')
 api.add_resource(AlbumApi, '/api/colecao/<string:tipo>/album/<string:id>')
 
 if __name__ == '__main__':

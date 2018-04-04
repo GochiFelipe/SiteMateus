@@ -19,11 +19,11 @@ class ColecaoApi(Resource):
             return adicionaColecao
         except:
             return('Objeto Incompleto')
-    
-    def put(self, id):
+
+    def put(self, tipo):
         parser = reqparse.RequestParser()
         parser.add_argument('_id')
         parser.add_argument('Tipo')
         parser.add_argument('Album', type = Album.albumParser, action='append')
         args_principal = parser.parse_args()
-        return ColecaoDao.Atualiza.atualizaColecao(self, args_principal, id)
+        return ColecaoDao.Atualiza.atualizaColecao(self, args_principal, tipo)

@@ -1,32 +1,26 @@
-class Foto:
-    def __init__(self, Tipo, Url, Local, Tag = []):
-        self.Tipo = Tipo
+class Foto(object):
+    def __init__(self, Id, Url, Tipo, Local, Album, Tag = []):
+        self.Id = Id
         self.Url = Url
+        self. Tipo = Tipo
         self.Local = Local
         self.Tag = Tag
 
     def recuperaFotos(self, itens):
-        Fotos = []
-        for fotos in itens.get('Fotos'):
-            Foto_id = str(fotos.get('_id'))
-            Tipo_foto = fotos.get('Tipo')
-            Url_foto = fotos.get('Url')
-            Tag_Foto = Foto.RecuperaTagFoto(self, fotos)
-            Local_foto = fotos.get('Local')
-            foto = Foto(Tipo_foto, Url_foto, Local_foto, Tag_Foto)
-            f = {
-                "IdFoto" : Foto_id,
-                "TipoFoto" : foto.Tipo,
-                "UrlFoto" : foto.Url,
-                "LocalFoto" : foto.Local,
-                "Tags" : foto.Tag
-            }
-            Fotos.append(f)
-        return Fotos
+        for foto in itens.get('Fotos'):
+            foto = Foto(
+                str(foto.get('_id')),
+                foto.get('Url'),
+                foto.get('Tipo'),
+                foto.get('Local'),
+                foto.get('Album'),
+                Foto.RecuperaTagFoto(self, foto)
+            )
+        return foto.__dict__
     
-    def RecuperaTagFoto(self, fotos):
+    def RecuperaTagFoto(self, foto):
         Tag = []
-        for tag in fotos.get('Tags'):
+        for tag in foto.get('Tags'):
             Item_Tag = tag
             Tag.append(Item_Tag)
         return Tag

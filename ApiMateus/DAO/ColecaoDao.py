@@ -9,34 +9,17 @@ class ColecaoDao:
     class Busca:
 
         def buscaColecaoTipo(self, tipo):
-            try:
+            #try:
                 colecoes = Colecoes.find({"Tipo":tipo.lower()})
-
-                for itens in colecoes:
-                    pprint(itens)
-                    Id = str(itens.get('_id'))
-                    Albuns = Album.recuperaAlbuns(self, itens)
-                    Tipo = itens.get("Tipo")
-                    colecao = Colecao(Tipo, Albuns)
-                return {'Id' : Id,
-                        'Tipo' : Tipo,
-                        'Album' : colecao.Album }
+                return ColecaoDao.montaObjeto(self, colecoes)
         
-            except:
-                return ('Sem conexão com o Banco')
+            #except:
+            #    return ('Sem conexão com o Banco')
 
         def buscaColecaoId(self, id):
             try:
                 colecoes = Colecoes.find({"_id":ObjectId(id)})
-                for itens in colecoes:
-                    pprint(itens)
-                    Id = str(itens.get('_id'))
-                    Albuns = Album.recuperaAlbuns(self, itens)
-                    Tipo = itens.get("Tipo")
-                    colecao = Colecao(Tipo, Albuns)
-                return {'Id' : Id,
-                        'Tipo' : Tipo,
-                        'Album' : colecao.Album }
+                return ColecaoDao.montaObjeto(self, colecoes)
         
             except:
                 return ('Sem conexão com o Banco')
@@ -52,12 +35,25 @@ class ColecaoDao:
                 return False
 
     class Atualiza:
+
         def atualizaColecao(self, objeto, id):
             put = objeto
             objetoAlterar = ColecaoDao.Busca.buscaColecaoId(self, id)
-            colecaoAtualizada = Colecoes.replace_one(objetoAlterar, put)
+            colecaoAtualizada = Colecoes.replace_one(put, objetoAlterar)
+            print(colecaoAtualizada)
             print (colecaoAtualizada.matched_count)
-            return True
+            return objetoAlterar
     
     class Deleta:
         pass
+
+    def montaObjeto(self, objeto):
+        for itens in objeto:
+            pprint(itens)
+            Id = str(itens.get('_id'))
+            Albuns = Album.recuperaAlbuns(self, itens)
+            Tipo = itens.get("Tipo")
+            colecao = Colecao(Tipo, Albuns)
+            return {'Id' : Id,
+                    'Tipo' : Tipo,
+                    'Album' : colecao.Album }

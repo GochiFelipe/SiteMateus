@@ -1,22 +1,18 @@
-class Video:
-    def __init__(self, Nome, Url, Tipo):
+class Video(object):
+    def __init__(self, Id, Url, Nome, Tipo, Album):
+        self.Id = Id
         self.Nome = Nome
         self.Url = Url
         self.Tipo = Tipo
+        self.Album = Album
 
-    def recuperaVideos(self, itens):
+    def videoHelper(self, itens):
         Videos = []
-        for videos in itens.get('Videos'):
-            Video_id = str(videos.get('_id'))
-            Nome_Video = videos.get('Nome')
-            Url_Video = videos.get('Url')
-            Tipo_Video = videos.get('Tipo')
-            video = Video(Nome_Video, Url_Video, Tipo_Video)
-            v = {
-                "IdVideo": Video_id,
-                "NomeVideo": video.Nome,
-                "UrlVideo": video.Url,
-                "TipoVideo": video.Tipo
-            }
-            Videos.append(v)
+        for video in itens.get('Videos'):
+            video = Video(str(video.get('_id')),
+                            video.get('Url'),
+                            video.get('Nome'),
+                            video.get('Tipo'),
+                            video.get('Nome_Album'))
+            Videos.append(video.__dict__)
         return Videos
