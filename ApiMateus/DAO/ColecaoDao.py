@@ -4,6 +4,8 @@ from bson import ObjectId
 from Models.Album import *
 from Models.Colecao import *
 
+from Helper.ColecaoHelper.ColecaoHelper import ColecaoHelper
+
 class ColecaoDao:
 
     class Busca:
@@ -11,7 +13,7 @@ class ColecaoDao:
         def buscaColecaoTipo(self, tipo):
             #try:
                 colecoes = Colecoes.find({"Tipo":tipo.lower()})
-                return ColecaoDao.montaObjeto(self, colecoes)
+                return ColecaoHelper.colecaoHelper(self, colecoes)
         
             #except:
             #    return ('Sem conexão com o Banco')
@@ -19,7 +21,7 @@ class ColecaoDao:
         def buscaColecaoId(self, id):
             try:
                 colecoes = Colecoes.find({"_id":ObjectId(id)})
-                return ColecaoDao.montaObjeto(self, colecoes)
+                return ColecaoHelper.colecaoHelper(self, colecoes)
         
             except:
                 return ('Sem conexão com o Banco')
@@ -46,14 +48,3 @@ class ColecaoDao:
     
     class Deleta:
         pass
-
-    def montaObjeto(self, objeto):
-        for itens in objeto:
-            pprint(itens)
-            Id = str(itens.get('_id'))
-            Albuns = Album.recuperaAlbuns(self, itens)
-            Tipo = itens.get("Tipo")
-            colecao = Colecao(Tipo, Albuns)
-            return {'Id' : Id,
-                    'Tipo' : Tipo,
-                    'Album' : colecao.Album }
