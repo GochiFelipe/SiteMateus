@@ -10,13 +10,13 @@ class ColecaoDao:
 
     class Busca:
 
-        def buscaColecaoTipo(self, tipo):
-            #try:
+        def buscaColecaoTipo(self, tipo, parametro = None):
+            try:
                 colecoes = Colecoes.find({"Tipo":tipo.lower()})
-                return ColecaoHelper.colecaoHelper(self, colecoes)
+                return ColecaoHelper.colecaoHelper(self, colecoes, parametro)
         
-            #except:
-            #    return ('Sem conexão com o Banco')
+            except:
+                return ('Sem conexão com o Banco')
 
         def buscaColecaoId(self, id):
             try:

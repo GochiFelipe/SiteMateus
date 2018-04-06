@@ -4,7 +4,7 @@ from Helper.VideoHelper.VideoHelper import VideoHelper
 
 class AlbumHelper(Album):
 
-    def albumHelper(self, itens, identificador):
+    def albumHelper(self, itens, parametro):
         Albuns = []
         for album in itens:
             a = Album(str(album.get('_id')), 
@@ -15,7 +15,7 @@ class AlbumHelper(Album):
                             FotoHelper.fotosHelper(self, album.get('Fotos'))
             )
             Albuns.append(a.__dict__)
-        if(identificador == 'colecao'):
-            return Albuns
-        else:
+        if(parametro):
             return a.__dict__
+        else:
+            return Albuns

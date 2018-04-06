@@ -13,7 +13,7 @@ class AlbumDao:
 
         def buscaAlbumIdTipo(self, tipo, id):
             albuns = Albuns.find({"_id":ObjectId(id),"Tipo":tipo.lower()})
-            return AlbumHelper.albumHelper(self, albuns, 'id')
+            return AlbumHelper.albumHelper(self, albuns, id)
         
     class Insere:
 
