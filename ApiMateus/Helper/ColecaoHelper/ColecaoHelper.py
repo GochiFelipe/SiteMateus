@@ -1,12 +1,22 @@
 from Models.Colecao import Colecao
-from Helper.AlbumHelper.AlbumHelper import AlbumHelper
-
+from DAO.AlbumDao import AlbumDao
 class ColecaoHelper(Colecao):
-    def colecaoHelper(self, objeto, parametro):
+    def montaColecaoAlbuns(self, objeto, parametro):
         for itens in objeto:
-            colecao = Colecao(str(itens.get('_id')), 
+           return Colecao(str(itens.get('_id')), 
                                 itens.get("Tipo"),
-                                AlbumHelper.albumHelper(self, 
-                                    itens.get('Album'), parametro),
+                                AlbumDao.Busca.buscaAlbumTipo(self, 
+                                    itens.get('Tipo')),
+            ).__dict__
+
+    def montaListaColecoes(self, colecoes):
+        Tipos = []
+        for itens in colecoes:
+            colecao = Colecao(
+                str(itens.get('_id')),
+                itens.get("Tipo")
             )
-        return colecao.__dict__
+            Tipos.append(colecao.Tipo)
+        return Tipos
+
+    

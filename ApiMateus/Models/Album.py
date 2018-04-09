@@ -10,11 +10,3 @@ class Album(object):
         self.Fotos = Fotos
         self.FotoCapa = FotoCapa
         self.Tipo = Tipo
-    
-
-    def albumParser(objeto):
-        Valores = {}
-        for (nomes, valores) in objeto.items():
-            Valores.update({nomes :valores})
-            print(Valores)
-        return Valores

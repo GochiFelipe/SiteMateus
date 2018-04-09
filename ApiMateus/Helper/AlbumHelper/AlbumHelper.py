@@ -1,21 +1,23 @@
 from Models.Album import Album
 from Helper.FotoHelper.FotoHelper import FotoHelper
 from Helper.VideoHelper.VideoHelper import VideoHelper
+from DAO.VideoDao import VideoDao
+from DAO.FotoDao import FotoDao
 
 class AlbumHelper(Album):
 
-    def albumHelper(self, itens, parametro):
+    def montaAlbum(self, itens, parametro = None):
         Albuns = []
         for album in itens:
             a = Album(str(album.get('_id')), 
-                            album.get('FotoCapa'),
                             album.get('Nome'), 
+                            album.get('FotoCapa'),
                             album.get('Tipo'),
-                            VideoHelper.videoHelper(self, album.get('Videos')),
-                            FotoHelper.fotosHelper(self, album.get('Fotos'))
+                            VideoDao.Busca.buscaVideoAlbum(self, album.get('Nome')),
+                            FotoDao.Busca.buscaFotoAlbum(self, album.get('Nome')),
             )
             Albuns.append(a.__dict__)
-        if(parametro):
+        if parametro:
             return a.__dict__
         else:
             return Albuns

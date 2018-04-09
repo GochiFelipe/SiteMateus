@@ -1,7 +1,7 @@
 from Models.Foto import Foto
 
 class FotoHelper(Foto):
-    def fotosHelper(self, itens):
+    def montaFotos(self, itens):
         Fotos = []
         for foto in itens:
             fotos = Foto(
@@ -10,14 +10,14 @@ class FotoHelper(Foto):
                 foto.get('Tipo'),
                 foto.get('Local'),
                 foto.get('Album'),
-                FotoHelper.tagFotoHelper(self, foto)
+                FotoHelper.montaTags(self, foto.get('Tag'))
             )
             Fotos.append(fotos.__dict__)
         return Fotos
 
-    def tagFotoHelper(self, foto):
+    def montaTags(self, foto):
         Tag = []
-        for tag in foto.get('Tags'):
+        for tag in foto:
             Item_Tag = tag
             Tag.append(Item_Tag)
         return Tag

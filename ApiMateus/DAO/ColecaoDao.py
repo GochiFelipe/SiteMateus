@@ -13,18 +13,23 @@ class ColecaoDao:
         def buscaColecaoTipo(self, tipo, parametro = None):
             try:
                 colecoes = Colecoes.find({"Tipo":tipo.lower()})
-                return ColecaoHelper.colecaoHelper(self, colecoes, parametro)
+                return ColecaoHelper.montaColecaoAlbuns(self, colecoes, parametro)
         
             except:
                 return ('Sem conexão com o Banco')
+            
+        def buscasColecoes(self):
+            colecoes = Colecoes.find({},{"Tipo":1, "_id": 0})
+            return ColecaoHelper.montaListaColecoes(self, colecoes)
 
-        def buscaColecaoId(self, id):
-            try:
-                colecoes = Colecoes.find({"_id":ObjectId(id)})
-                return ColecaoHelper.colecaoHelper(self, colecoes)
-        
-            except:
-                return ('Sem conexão com o Banco')
+
+        #def buscaColecaoId(self, id):
+        #    try:
+        #        colecoes = Colecoes.find({"_id":ObjectId(id)})
+        #        return ColecaoHelper.montaColecaoAlbuns(self, colecoes, None)
+        #
+        #    except:
+        #        return ('Sem conexão com o Banco')
 
     class Insere:
 
@@ -37,14 +42,14 @@ class ColecaoDao:
                 return False
 
     class Atualiza:
-
-        def atualizaColecao(self, objeto, id):
-            put = objeto
-            objetoAlterar = ColecaoDao.Busca.buscaColecaoId(self, id)
-            colecaoAtualizada = Colecoes.replace_one(put, objetoAlterar)
-            print(colecaoAtualizada)
-            print (colecaoAtualizada.matched_count)
-            return objetoAlterar
+        pass
+        #def atualizaColecao(self, objeto, id):
+        #    put = objeto
+        #    objetoAlterar = ColecaoDao.Busca.buscaColecaoId(self, id)
+        #    colecaoAtualizada = Colecoes.replace_one(put, objetoAlterar)
+        #    print(colecaoAtualizada)
+        #    print (colecaoAtualizada.matched_count)
+        #    return objetoAlterar
     
     class Deleta:
         pass
