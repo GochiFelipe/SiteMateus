@@ -4,7 +4,7 @@ from Helper.FotoHelper.FotoHelper import FotoHelper
 
 class FotosApi(Resource):
 
-    def get(self, tipo, idAlbum = None, id= None):
+    def get(self, acervo, tipo, idAlbum = None, id= None):
         if idAlbum and id:
             try:
                 return FotoDao.Busca.buscaFotoTipoId(self, tipo,idAlbum, id)
@@ -13,7 +13,7 @@ class FotosApi(Resource):
         else:
             pass
 
-    def post(self, tipo):
+    def post(self, acervo, tipo):
         parser = reqparse.RequestParser()
         parser.add_argument('Url')
         parser.add_argument('Tipo')

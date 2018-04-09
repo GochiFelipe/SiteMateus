@@ -13,15 +13,24 @@ class ColecaoDao:
         def buscaColecaoTipo(self, tipo, parametro = None):
             try:
                 colecoes = Colecoes.find({"Tipo":tipo.lower()})
-                return ColecaoHelper.montaColecaoAlbuns(self, colecoes, parametro)
-        
+                return ColecaoHelper.montaColecaoAlbuns(self, colecoes)
+
             except:
                 return ('Sem conexão com o Banco')
             
         def buscasColecoes(self):
-            colecoes = Colecoes.find({},{"Tipo":1, "_id": 0})
-            return ColecaoHelper.montaListaColecoes(self, colecoes)
+            try:
+                colecoes = Colecoes.find({},{"Tipo":1, "_id": 0})
+                return ColecaoHelper.montaListaColecoes(self, colecoes)
+            except:
+                return ('Sem conexão com o Banco')
 
+        def buscaColecaoAcervo(self, acervo):
+            try:
+                colecoes = Colecoes.find({"Acervo": acervo.lower()})
+                return ColecaoHelper.montaColecaoAlbuns(self, colecoes)
+            except:
+                return('Sem conexão com o Banco')
 
         #def buscaColecaoId(self, id):
         #    try:

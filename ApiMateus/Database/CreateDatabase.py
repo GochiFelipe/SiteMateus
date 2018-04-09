@@ -7,6 +7,7 @@ Albuns = db.Albuns
 Fotos = db.Fotos
 Videos = db.Videos
 Colecoes = db.Colecoes
+Acervos = db.Acervos
 
 '''
 Video =[    
@@ -103,7 +104,21 @@ for k in Itens_Albuns:
 
 Colecao = {
     "Tipo" : "conceitual",
+    "Acervo": "conceitual",
     "Album" : Item_Album
 }
 
-Colecao_id = Colecoes.insert_one(Colecao)'''
+Colecao_id = Colecoes.insert_one(Colecao)
+print (Colecao_id)
+Itens_Colecoes = Colecoes.find({"Acervo": "conceitual"})
+Item_Colecao = []
+for y in Itens_Colecoes:
+    Item_Colecao.append(y)
+    print(Item_Colecao)
+
+Acervo = {
+    "Acervo" : "conceitual",
+    "Colecao" : Item_Colecao
+}
+
+Acervo_id = Acervos.insert_one(Acervo)'''
