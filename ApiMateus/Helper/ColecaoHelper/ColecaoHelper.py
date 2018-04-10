@@ -5,7 +5,7 @@ class ColecaoHelper(Colecao):
         for itens in objeto:
            return Colecao(str(itens.get('_id')), 
                                 itens.get("Tipo"),
-                                itens.get("Acervo"),
+                                itens.get("Galeria"),
                                 AlbumDao.Busca.buscaAlbumTipo(self, 
                                     itens.get('Tipo'))
             ).__dict__
@@ -16,7 +16,7 @@ class ColecaoHelper(Colecao):
             colecao = Colecao(
                 str(itens.get('_id')),
                 itens.get("Tipo"),
-                itens.get("Acervo")
+                itens.get("Galeria")
             )
             Tipos.append(colecao.Tipo)
         return Tipos

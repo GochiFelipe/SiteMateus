@@ -3,7 +3,7 @@ from Models.Album import Album
 from DAO.ColecaoDao import ColecaoDao
 from DAO.AlbumDao import AlbumDao
 class ColecaoApi(Resource):
-    def get(self,acervo , tipo = None):
+    def get(self, galeria, tipo = None):
         if tipo:
             try:
                 return ColecaoDao.Busca.buscaColecaoTipo(self, tipo)

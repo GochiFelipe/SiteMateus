@@ -4,7 +4,7 @@ from DAO.VideoDao import VideoDao
 from DAO.FotoDao import FotoDao
 
 class AlbumApi(Resource):
-    def get(self, acervo, tipo, id = None):
+    def get(self, galeria, tipo, id = None):
         if id:
             try:
                 return AlbumDao.Busca.buscaAlbumIdTipo(self, tipo, id)
@@ -13,7 +13,7 @@ class AlbumApi(Resource):
         else:
             pass
 
-    def post(self, acervo, tipo, id = None):
+    def post(self, galeria, tipo, id = None):
         if id:
             pass
         else:

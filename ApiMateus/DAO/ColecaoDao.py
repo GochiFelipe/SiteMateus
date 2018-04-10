@@ -1,8 +1,6 @@
 from Database.CreateDatabase import *
 from pprint import pprint
 from bson import ObjectId
-from Models.Album import *
-from Models.Colecao import *
 
 from Helper.ColecaoHelper.ColecaoHelper import ColecaoHelper
 
@@ -11,12 +9,12 @@ class ColecaoDao:
     class Busca:
 
         def buscaColecaoTipo(self, tipo, parametro = None):
-            try:
+            #try:
                 colecoes = Colecoes.find({"Tipo":tipo.lower()})
                 return ColecaoHelper.montaColecaoAlbuns(self, colecoes)
 
-            except:
-                return ('Sem conexão com o Banco')
+            #except:
+            #    return ('Sem conexão com o Banco')
             
         def buscasColecoes(self):
             try:
@@ -25,9 +23,9 @@ class ColecaoDao:
             except:
                 return ('Sem conexão com o Banco')
 
-        def buscaColecaoAcervo(self, acervo):
+        def buscaColecaoGaleria(self, galeria):
             try:
-                colecoes = Colecoes.find({"Acervo": acervo.lower()})
+                colecoes = Colecoes.find({"Galeria": galeria.lower()})
                 return ColecaoHelper.montaColecaoAlbuns(self, colecoes)
             except:
                 return('Sem conexão com o Banco')

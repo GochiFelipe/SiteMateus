@@ -5,7 +5,7 @@ from DAO.FotoDao import FotoDao
 
 class VideosApi(Resource):
 
-    def get(self, acervo, tipo, idAlbum = None, id= None):
+    def get(self, galeria, tipo, idAlbum = None, id= None):
         if idAlbum and id:
             try:
                 return VideoDao.Busca.buscaVideoTipoId(self, tipo,idAlbum, id)
@@ -14,7 +14,7 @@ class VideosApi(Resource):
         else:
             pass
 
-    def post(self, acervo, tipo):
+    def post(self, galeria, tipo):
         parser = reqparse.RequestParser()
         parser.add_argument('Nome')
         parser.add_argument('Url')
