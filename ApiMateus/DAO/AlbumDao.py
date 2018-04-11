@@ -5,7 +5,7 @@ from Models.Album import Album
 from Models.Video import *
 from Models.Foto import *
 
-from Helper.AlbumHelper.AlbumHelper import AlbumHelper
+from Helper.AlbumHelper import AlbumHelper
 
 class AlbumDao:
 
@@ -30,7 +30,20 @@ class AlbumDao:
                 return False
 
     class Atualiza:
-        pass
+        def atualizaAlbum(self, objeto):
+            put = objeto
+            album = Album(put.get('_id'),
+                            put.get('Nome'),
+                            put.get('FotoCapa'),
+                            put.get('Tipo')
+                        )
+            Retorno = AlbumHelper.verificaAlteracao(self, album, Albuns)
+            if Retorno == 'Não existe alterações' :
+                return 'Não existe alterações'
+            if Retorno == 'Alterado Com Sucesso':
+                return True
+            else:
+                return False
     
     class Deleta:
         pass

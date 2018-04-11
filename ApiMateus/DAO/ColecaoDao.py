@@ -1,8 +1,9 @@
 from Database.CreateDatabase import *
 from pprint import pprint
 from bson import ObjectId
+from Models.Colecao import Colecao
 
-from Helper.ColecaoHelper.ColecaoHelper import ColecaoHelper
+from Helper.ColecaoHelper import ColecaoHelper
 
 class ColecaoDao:
 
@@ -49,14 +50,22 @@ class ColecaoDao:
                 return False
 
     class Atualiza:
-        pass
-        #def atualizaColecao(self, objeto, id):
-        #    put = objeto
-        #    objetoAlterar = ColecaoDao.Busca.buscaColecaoId(self, id)
-        #    colecaoAtualizada = Colecoes.replace_one(put, objetoAlterar)
-        #    print(colecaoAtualizada)
-        #    print (colecaoAtualizada.matched_count)
-        #    return objetoAlterar
+        def atualizaColecao(self, objeto):
+            try:
+                put = objeto
+                colecao = Colecao(put.get('_id'),
+                                    put.get('Tipo'),
+                                    put.get('Galeria')
+                                )
+                Retorno = ColecaoHelper.verificaAlteracao(self, colecao, Colecoes)
+                if Retorno == 'Não existe alterações' :
+                    return 'Não existe alterações'
+                if Retorno == 'Alterado Com Sucesso':
+                    return True
+                else:
+                    return False
+            except:
+                return False
     
     class Deleta:
         pass

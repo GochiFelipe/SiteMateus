@@ -28,10 +28,13 @@ class ColecaoApi(Resource):
             except:
                 return('Objeto Incompleto')
 
-    def put(self, tipo):
-        pass
-        #parser = reqparse.RequestParser()
-        #parser.add_argument('_id')
-        #parser.add_argument('Tipo')
-        #args_principal = parser.parse_args()
-        #return ColecaoDao.Atualiza.atualizaColecao(self, args_principal, tipo)
+    def put(self,galeria, tipo = None):
+        if tipo:
+            parser = reqparse.RequestParser()
+            parser.add_argument('_id')
+            parser.add_argument('Tipo')
+            parser.add_argument('Galeria')
+            args_principal = parser.parse_args()
+            return ColecaoDao.Atualiza.atualizaColecao(self, args_principal)
+        else:
+            pass

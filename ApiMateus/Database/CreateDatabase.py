@@ -7,7 +7,7 @@ Albuns = db.Albuns
 Fotos = db.Fotos
 Videos = db.Videos
 Colecoes = db.Colecoes
-Galeria = db.Galeria
+Galerias = db.Galerias
 '''
 Video =[    
     {
@@ -115,9 +115,9 @@ for y in Itens_Colecoes:
     Item_Colecao.append(y)
     print(Item_Colecao)
 
-Galerias = {
+Galeria = {
     "Galeria" : "conceitual",
     "Colecao" : Item_Colecao
 }
 
-Galeria_id = Galeria.insert_one(Galerias)'''
+Galeria_id = Galerias.insert_one(Galeria)'''

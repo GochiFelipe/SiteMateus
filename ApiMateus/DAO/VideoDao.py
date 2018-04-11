@@ -1,5 +1,5 @@
 from Database.CreateDatabase import *
-from Helper.VideoHelper.VideoHelper import VideoHelper
+from Helper.VideoHelper import VideoHelper
 from bson import ObjectId
 
 

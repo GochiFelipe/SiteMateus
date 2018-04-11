@@ -1,6 +1,5 @@
 from flask_restful import Resource, reqparse
 from DAO.FotoDao import FotoDao
-from Helper.FotoHelper.FotoHelper import FotoHelper
 
 class FotosApi(Resource):
 

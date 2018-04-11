@@ -1,7 +1,5 @@
 from flask_restful import Resource, reqparse
-from DAO.AlbumDao import AlbumDao
 from DAO.VideoDao import VideoDao
-from DAO.FotoDao import FotoDao
 
 class VideosApi(Resource):
 

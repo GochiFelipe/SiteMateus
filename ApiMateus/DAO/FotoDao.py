@@ -1,5 +1,5 @@
 from Database.CreateDatabase import *
-from Helper.FotoHelper.FotoHelper import FotoHelper
+from Helper.FotoHelper import FotoHelper
 from bson import ObjectId
 
 
