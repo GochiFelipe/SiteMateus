@@ -10,12 +10,12 @@ class ColecaoDao:
     class Busca:
 
         def buscaColecaoTipo(self, tipo, parametro = None):
-            #try:
+            try:
                 colecoes = Colecoes.find({"Tipo":tipo.lower()})
                 return ColecaoHelper.montaColecaoAlbuns(self, colecoes)
 
-            #except:
-            #    return ('Sem conexão com o Banco')
+            except:
+                return ('Sem conexão com o Banco')
             
         def buscasColecoes(self):
             try:
@@ -31,20 +31,20 @@ class ColecaoDao:
             except:
                 return('Sem conexão com o Banco')
 
-        #def buscaColecaoId(self, id):
-        #    try:
-        #        colecoes = Colecoes.find({"_id":ObjectId(id)})
-        #        return ColecaoHelper.montaColecaoAlbuns(self, colecoes, None)
-        #
-        #    except:
-        #        return ('Sem conexão com o Banco')
+        def buscaColecaoId(self, id):
+            try:
+                colecoes = Colecoes.find({"_id":ObjectId(id)})
+                return ColecaoHelper.montaColecaoAlbuns(self, colecoes)
+        
+            except:
+                return ('Sem conexão com o Banco')
 
     class Insere:
 
         def inserirColecao(self, objeto):
             try:
                 post = objeto
-                colecao = Colecoes.insert_one(post)
+                Colecoes.insert_one(post)
                 return True
             except:
                 return False
@@ -53,11 +53,14 @@ class ColecaoDao:
         def atualizaColecao(self, objeto):
             try:
                 put = objeto
-                colecao = Colecao(put.get('_id'),
+                print(put.get('Tipo'))
+                print(put.get('Galeria'))
+                colecao = Colecao(put.get('Id'),
                                     put.get('Tipo'),
                                     put.get('Galeria')
                                 )
-                Retorno = ColecaoHelper.verificaAlteracao(self, colecao, Colecoes)
+                alteracao = ColecaoDao.Busca.buscaColecaoId(self, colecao.Id)
+                Retorno = ColecaoDao.Atualiza.verificaAlteracao(self, colecao, alteracao)
                 if Retorno == 'Não existe alterações' :
                     return 'Não existe alterações'
                 if Retorno == 'Alterado Com Sucesso':
@@ -66,6 +69,43 @@ class ColecaoDao:
                     return False
             except:
                 return False
+            
+        def atualizaColecaoTipo(self, colecao):
+            Colecoes.update_one(
+                {'_id': ObjectId(colecao.Id)},
+                {
+                    "$set":{
+                        "Tipo" : colecao.Tipo
+                    }
+                }
+            )
+
+        def atualizaColecaoGaleria(self, colecao):
+            Colecoes.update_one(
+                {'_id': ObjectId(colecao.Id)},
+                {
+                    "$set":{
+                        "Galeria" : colecao.Galeria
+                    }
+                }
+            )
+            
+        def verificaAlteracao(self, colecao, alteracao):
+            try:
+                if colecao.Galeria != alteracao['Galeria']:
+                    ColecaoDao.Atualiza.atualizaColecaoGaleria(self, colecao)
+
+                if colecao.Tipo != alteracao['Tipo']:
+                    ColecaoDao.Atualiza.atualizaColecaoTipo(self, colecao)
+
+                else:
+                    return ('Não existe alterações')
+
+                return ('Alterado Com Sucesso')
+
+            except:
+                return False
+
     
     class Deleta:
         pass

@@ -22,35 +22,3 @@ class ColecaoHelper(Colecao):
             )
             Tipos.append(colecao.Tipo)
         return Tipos
-
-    def verificaAlteracao(self, colecao, Colecoes):
-        try:
-            buscas = Colecoes.find({'_id': ObjectId(colecao.Id)})
-            for itens in buscas:
-                colecaoBusca = Colecao(itens.get('_id'),
-                                        itens.get('Tipo'),
-                                        itens.get('Galeria')
-                )
-                if colecao.Galeria != colecaoBusca.Galeria:
-                    Colecoes.update_one(
-                        {'_id': ObjectId(colecao.Id)},
-                        {
-                            "$set":{
-                                "Galeria" : colecao.Galeria
-                            }
-                        }
-                    )
-                if colecao.Tipo != colecaoBusca.Tipo:
-                    Colecoes.update_one(
-                        {'_id': ObjectId(colecao.Id)},
-                        {
-                            "$set":{
-                                "Tipo" : colecao.Tipo
-                            }
-                        }
-                    )
-                else:
-                    return ('Não existe alterações')
-            return ('Alterado Com Sucesso')
-        except:
-            return False

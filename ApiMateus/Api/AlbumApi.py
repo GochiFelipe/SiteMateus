@@ -31,7 +31,7 @@ class AlbumApi(Resource):
     def put(self, galeria, tipo, id = None):
         if id:
             parser = reqparse.RequestParser()
-            parser.add_argument('_id')
+            parser.add_argument('Id')
             parser.add_argument('Nome')
             parser.add_argument('FotoCapa')
             parser.add_argument('Tipo')

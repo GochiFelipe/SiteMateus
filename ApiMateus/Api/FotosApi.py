@@ -22,3 +22,10 @@ class FotosApi(Resource):
         args_principal = parser.parse_args()
         adicionaFoto = FotoDao.Insere.inserirFoto(self, args_principal)
         return adicionaFoto
+
+    def put(self, galeria, tipo):
+        parser = reqparse.RequestParser()
+        parser.add_argument('Url')
+        parser.add_argument('Tipo')
+        parser.add_argument('Local')
+        parser.add_argument('Album')

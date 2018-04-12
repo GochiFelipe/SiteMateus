@@ -5,6 +5,7 @@ from Models.Album import *
 from Models.Colecao import *
 from Models.Galeria import Galeria
 from Helper.GaleriaHelper import GaleriaHelper
+from DAO.ColecaoDao import ColecaoDao
 
 class GaleriaDao:
     
@@ -18,11 +19,15 @@ class GaleriaDao:
                 return ('Sem conexão com o Banco')
 
         def buscaGaleriaColecao(self, galeria):
-            #try:
+            try:
                 galerias = Galerias.find({"Galeria": galeria.lower()})
                 return GaleriaHelper.montaGaleriaColecao(self, galerias)
-            #except:
-            #    return ('Sem conexão com o Banco')
+            except:
+                return ('Sem conexão com o Banco')
+
+        def buscaGaleriaId(self, id):
+            galerias = Galerias.find({"_id":ObjectId(id)})
+            return GaleriaHelper.montaGaleriaColecao(self, galerias)
                 
     class Insere:
 
@@ -39,7 +44,7 @@ class GaleriaDao:
         def atualizaGaleria(self, objeto):
             try:
                 put = objeto
-                galeria = Galeria(put.get('_id'), 
+                galeria = Galeria(put.get('Id'), 
                                     put.get('Galeria'))
                 Galerias.update_one(
                     {'_id':ObjectId(galeria.Id)},

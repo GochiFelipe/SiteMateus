@@ -31,7 +31,7 @@ class ColecaoApi(Resource):
     def put(self,galeria, tipo = None):
         if tipo:
             parser = reqparse.RequestParser()
-            parser.add_argument('_id')
+            parser.add_argument('Id')
             parser.add_argument('Tipo')
             parser.add_argument('Galeria')
             args_principal = parser.parse_args()

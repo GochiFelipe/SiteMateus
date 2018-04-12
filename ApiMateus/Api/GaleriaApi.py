@@ -33,7 +33,7 @@ class GaleriaApi(Resource):
             pass
         else:
             parser = reqparse.RequestParser()
-            parser.add_argument('_id')
+            parser.add_argument('Id')
             parser.add_argument('Galeria')
             args_principal = parser.parse_args()
             atualizaGaleria = GaleriaDao.Atualiza.atualizaGaleria(self, args_principal)
