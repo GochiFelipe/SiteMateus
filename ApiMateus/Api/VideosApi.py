@@ -21,3 +21,16 @@ class VideosApi(Resource):
         args_principal = parser.parse_args()
         adicionaVideo = VideoDao.Insere.inserirVideo(self, args_principal)
         return adicionaVideo
+
+    def put(self, galeria, tipo, idAlbum = None, id = None):
+        if idAlbum and id:
+            parser = reqparse.RequestParser()
+            parser.add_argument('Id')
+            parser.add_argument('Nome')
+            parser.add_argument('Url')
+            parser.add_argument('Tipo')
+            parser.add_argument('Album')
+            args_principal = parser.parse_args()
+            return VideoDao.Atualiza.atualizaVideo(self, args_principal)
+        else:
+            pass

@@ -51,7 +51,7 @@ class FotoDao:
 
             if Retorno == "Não existem alterações":
                 return "Não existem alterações"
-            if Retorno == "Alterado com Sucesso":
+            if Retorno == "Alterado com sucesso":
                 return True
             else:
                 return False
@@ -101,7 +101,7 @@ class FotoDao:
                 {'_id': ObjectId(foto.Id)},
                 {
                     "$set":{
-                        "Tags" : lista
+                        "Tags" : foto.Tags
                     }
                 }
             )
