@@ -53,8 +53,6 @@ class ColecaoDao:
         def atualizaColecao(self, objeto):
             try:
                 put = objeto
-                print(put.get('Tipo'))
-                print(put.get('Galeria'))
                 colecao = Colecao(put.get('Id'),
                                     put.get('Tipo'),
                                     put.get('Galeria')
