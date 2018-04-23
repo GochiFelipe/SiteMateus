@@ -34,3 +34,8 @@ class VideosApi(Resource):
             return VideoDao.Atualiza.atualizaVideo(self, args_principal)
         else:
             pass
+
+    def delete(self, galeria, tipo, idAlbum, id):
+        deletaVideo = VideoDao.Deleta.deletaVideo(self, galeria, tipo, idAlbum, id)
+        return deletaVideo
+

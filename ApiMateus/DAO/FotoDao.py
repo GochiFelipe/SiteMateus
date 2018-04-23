@@ -126,3 +126,14 @@ class FotoDao:
                 return ('Não existem alterações')
             
             return ('Alterado com sucesso')
+    
+    class Deleta:
+        def deletaFoto(self, galeria, tipo, idAlbum, id):
+            try:
+                Fotos.delete_one({
+                    "Tipo":tipo,
+                    "_id": ObjectId(id)
+                })
+                return True
+            except:
+                return False

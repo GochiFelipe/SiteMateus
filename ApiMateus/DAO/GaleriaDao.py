@@ -33,8 +33,7 @@ class GaleriaDao:
 
         def inserirGaleria(self, objeto):
             try:
-                post = objeto
-                colecao = Colecoes.insert_one(post)
+                galeria = Galerias.insert_one(objeto)
                 return True
             except:
                 return False
@@ -54,6 +53,17 @@ class GaleriaDao:
                         }
                     }
                 )
+                return True
+            except:
+                return False
+
+    class Deleta:
+
+        def deletaGaleria(self, objeto):
+            try:
+                Galerias.delete_one({
+                    "Galeria": objeto
+                })
                 return True
             except:
                 return False

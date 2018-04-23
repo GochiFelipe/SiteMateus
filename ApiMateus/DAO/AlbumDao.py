@@ -99,4 +99,13 @@ class AlbumDao:
                 return False
     
     class Deleta:
-        pass
+
+        def deletaAlbum(self, galeria, tipo, id):
+            try:
+                Albuns.delete_one({
+                    "Tipo": tipo,
+                    "_id": ObjectId(id)                
+                })
+                return True
+            except:
+                return False

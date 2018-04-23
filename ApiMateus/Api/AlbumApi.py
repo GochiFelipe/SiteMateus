@@ -11,7 +11,10 @@ class AlbumApi(Resource):
             except:           
                 return ('Não Existem Registros')
         else:
-            pass
+            try:
+                return AlbumDao.Busca.buscaAlbumTipo(self, tipo)
+            except:           
+                return ('Não Existem Registros')
 
     def post(self, galeria, tipo, id = None):
         if id:
@@ -39,3 +42,7 @@ class AlbumApi(Resource):
             return AlbumDao.Atualiza.atualizaAlbum(self, args_principal)
         else:
             pass
+
+    def delete(self, galeria, tipo, id):
+        deletaAlbum = AlbumDao.Deleta.deletaAlbum(self, galeria, tipo, id)
+        return deletaAlbum

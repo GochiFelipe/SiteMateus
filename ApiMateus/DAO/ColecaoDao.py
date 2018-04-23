@@ -43,8 +43,7 @@ class ColecaoDao:
 
         def inserirColecao(self, objeto):
             try:
-                post = objeto
-                Colecoes.insert_one(post)
+                Colecoes.insert_one(objeto)
                 return True
             except:
                 return False
@@ -106,4 +105,14 @@ class ColecaoDao:
 
     
     class Deleta:
-        pass
+
+      def deletaColecao(self, galeria, tipo):
+        try:
+            Colecoes.delete_one({
+                "Tipo": tipo,
+                "Galeria": galeria
+            })
+            return True
+        except:
+            return False
+        

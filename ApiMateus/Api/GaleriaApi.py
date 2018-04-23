@@ -38,3 +38,10 @@ class GaleriaApi(Resource):
             args_principal = parser.parse_args()
             atualizaGaleria = GaleriaDao.Atualiza.atualizaGaleria(self, args_principal)
             return atualizaGaleria
+        
+    def delete(self, galeria):
+        if galeria:
+            deletaGaleria = GaleriaDao.Deleta.deletaGaleria(self, galeria)
+            return deletaGaleria
+        else:
+            pass

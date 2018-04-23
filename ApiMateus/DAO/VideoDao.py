@@ -111,3 +111,15 @@ class VideoDao:
                 return ('Não existem alterações')
             
             return ('Alterado com sucesso')
+
+    class Deleta:
+
+        def deletaVideo(self, galeria, tipo, idAlbum, id):
+            try:
+                Videos.delete_one({
+                    "Tipo": tipo,
+                    "_id": ObjectId(id)
+                })
+                return True
+            except:
+                return False

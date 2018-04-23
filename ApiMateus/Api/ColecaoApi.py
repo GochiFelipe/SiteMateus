@@ -15,12 +15,13 @@ class ColecaoApi(Resource):
             except:
                 return ('Não Existem Registros')
 
-    def post(self, tipo = None):
+    def post(self,galeria, tipo = None):
         if tipo:
             pass
         else:
             try:
                 parser = reqparse.RequestParser()
+                parser.add_argument('Galeria')
                 parser.add_argument('Tipo')
                 args_principal = parser.parse_args()
                 adicionaColecao = ColecaoDao.Insere.inserirColecao(self, args_principal)
@@ -28,7 +29,7 @@ class ColecaoApi(Resource):
             except:
                 return('Objeto Incompleto')
 
-    def put(self,galeria, tipo = None):
+    def put(self, galeria, tipo = None):
         if tipo:
             parser = reqparse.RequestParser()
             parser.add_argument('Id')
@@ -36,5 +37,12 @@ class ColecaoApi(Resource):
             parser.add_argument('Galeria')
             args_principal = parser.parse_args()
             return ColecaoDao.Atualiza.atualizaColecao(self, args_principal)
+        else:
+            pass
+
+    def delete(self, galeria, tipo = None):
+        if galeria and tipo:
+            deletaColecao = ColecaoDao.Deleta.deletaColecao(self, galeria, tipo)
+            return deletaColecao
         else:
             pass

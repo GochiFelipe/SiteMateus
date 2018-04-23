@@ -29,6 +29,6 @@ api.add_resource(VideosApi, '/api/galeria/<string:galeria>/colecao/<string:tipo>
 api.add_resource(FotosApi, '/api/galeria/<string:galeria>/colecao/<string:tipo>/album/fotos',
         '/api/galeria/<string:galeria>/colecao/<string:tipo>/album/<string:idAlbum>/foto/<string:id>')
 
-#if __name__ == '__main__':
-#    app.run(debug=True)
-app.run()
+if __name__ == '__main__':
+    app.run(debug=True)
+    #app.run()

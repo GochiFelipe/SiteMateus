@@ -5,10 +5,10 @@ class FotosApi(Resource):
 
     def get(self, galeria, tipo, idAlbum = None, id= None):
         if idAlbum and id:
-            #try:
+            try:
                 return FotoDao.Busca.buscaFotoTipoId(self, tipo,idAlbum, id)
-            #except:
-            #    return ('Não Existem Registros')
+            except:
+                return ('Não Existem Registros')
         else:
             pass
 
@@ -36,3 +36,7 @@ class FotosApi(Resource):
             return FotoDao.Atualiza.atualizaFoto(self, args_principal)
         else:
             pass
+
+    def delete(self, galeria, tipo, idAlbum, id):
+        deletaFoto = FotoDao.Deleta.deletaFoto(self, galeria, tipo, idAlbum, id)
+        return deletaFoto
