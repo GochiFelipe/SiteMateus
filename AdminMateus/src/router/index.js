@@ -14,9 +14,10 @@ export default new Router({
       component: Home
     },
     {
-      path:'/galeria',
+      path:'/galeria/:crud',
       name: 'Galeria',
-      component: Galeria
+      component: Galeria,
+      props:true
     },
     { 
       path: '*', 

@@ -1,8 +1,11 @@
 from flask import Flask
 from flask_restful import Api
 import os
+from flask_cors import CORS, cross_origin
+
 
 app = Flask(__name__)
+cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 api = Api(app)
 
 
@@ -30,5 +33,5 @@ api.add_resource(FotosApi, '/api/galeria/<string:galeria>/colecao/<string:tipo>/
         '/api/galeria/<string:galeria>/colecao/<string:tipo>/album/<string:idAlbum>/foto/<string:id>')
 
 if __name__ == '__main__':
-    app.run(debug=True)
-    #app.run()
+    #app.run(debug=True)
+    app.run()
